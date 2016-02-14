@@ -15,8 +15,8 @@ In addtion this lab uses the following built-in AngularJS directives:
 
 ## Codepens
 
-[Starter](http://codepen.io/drmikeh/pen/GJvBEy)
-[Solution](http://codepen.io/drmikeh/pen/OyjZPX?editors=101)
+* [Starter](http://codepen.io/drmikeh/pen/GJvBEy)
+* [Solution](http://codepen.io/drmikeh/pen/OyjZPX?editors=101)
 
 ## Starter Code
 
