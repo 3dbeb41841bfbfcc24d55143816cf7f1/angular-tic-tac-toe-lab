@@ -20,6 +20,8 @@ In addtion this lab uses the following built-in AngularJS directives:
 
 ## Starter Code
 
+### HTML
+
 ```html
 <html ng-app='ticTacToeApp'><head>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -53,6 +55,8 @@ In addtion this lab uses the following built-in AngularJS directives:
 </body>
 </html>
 ```
+
+### CSS
 
 ```css
 * {
@@ -88,6 +92,8 @@ button {
   color: red;
 }
 ```
+
+### JavaScript
 
 ```javascript
 angular.module('ticTacToeApp', []);
@@ -145,6 +151,8 @@ angular.module('ticTacToeApp')
 
 ## Solution Code
 
+### HTML
+
 ```html
 <body ng-app="ticTacToeApp" ng-controller="ticTacToeCtrl as ctrl">
   <h1>Tic Tac Toe!</h1>
@@ -171,8 +179,10 @@ angular.module('ticTacToeApp')
 </body>
 ```
 
+### CSS
+
 ```css
-*{
+* {
   text-align: center;
   font-family: "Courier"
 }
@@ -205,6 +215,8 @@ button {
   color: red;
 }
 ```
+
+### JavaScript
 
 ```javascript
 angular.module('ticTacToeApp', []);
