@@ -153,68 +153,12 @@ angular.module('ticTacToeApp')
 
 ### HTML
 
-```html
-<body ng-app="ticTacToeApp" ng-controller="ticTacToeCtrl as ctrl">
-  <h1>Tic Tac Toe!</h1>
-
-  <div class="container">
-    <div class="well">
-      <div ng-repeat="row in ctrl.board">
-        <button class="btn-lg"
-                ng-repeat="cell in row"
-                ng-disabled="ctrl.isTaken(cell);"
-                ng-class="cell.value"
-                ng-click="ctrl.move(cell);">{{ cell.value }}</button>
-      </div>
-      <br/>
-      <p>
-        <span ng-hide="ctrl.winner || ctrl.cat">Current Player: {{ ctrl.currentPlayer }}</span>
-        <span ng-show="ctrl.winner">Player {{ ctrl.currentPlayer }} won!</span>
-        <span ng-show="ctrl.cat">Cat</span>
-      </p>
-    </div>
-  </div>
-
-  <button ng-click="ctrl.reset();" class="btn btn-primary btn-large">New Game</button>
-</body>
-```
+See starter HTML.
 
 ### CSS
 
-```css
-* {
-  text-align: center;
-  font-family: "Courier"
-}
+See starter CSS.
 
-body {
-  padding: 20px 40px;
-  font-family: "Verdana";
-}
-
-h1 {
-  margin: 20px;
-}
-
-button {
-  background-color: white;
-}
-
-.t3cell {
-  width: 24px;
-  height: 24px;
-  min-width: 24px;
-  min-height: 24px;
-}
-
-.X {
-  color: green;
-}
-
-.O {
-  color: red;
-}
-```
 
 ### JavaScript
 
@@ -225,41 +169,41 @@ angular.module('ticTacToeApp')
 .controller('ticTacToeCtrl', function() {
 
   var emptyCell = '?';
-  var that = this;
+  var vm = this;
 
-  this.board = [
+  vm.board = [
     [ { value: emptyCell }, { value: emptyCell }, { value: emptyCell } ],
     [ { value: emptyCell }, { value: emptyCell }, { value: emptyCell } ],
     [ { value: emptyCell }, { value: emptyCell }, { value: emptyCell } ]
   ];
 
-  this.reset = function() {
-    this.board.forEach(function(row) {
+  vm.reset = function() {
+    vm.board.forEach(function(row) {
       row.forEach(function(cell) {
         cell.value = emptyCell;
       });
     });
-    this.currentPlayer = 'X';
-    this.winner = false;
-    this.cat = false;
+    vm.currentPlayer = 'X';
+    vm.winner = false;
+    vm.cat = false;
   };
 
-  this.reset();
+  vm.reset();
 
-  this.isTaken = function(cell) {
+  vm.isTaken = function(cell) {
     return cell.value !== emptyCell;
   };
 
-  var checkForMatch = function(cell1, cell2, cell3) {
+  function checkForMatch(cell1, cell2, cell3) {
     return cell1.value === cell2.value &&
            cell1.value === cell3.value &&
            cell1.value !== emptyCell;
   };
 
-  this.isBoardFull = function() {
+  function isBoardFull() {
     for (var row=0; row<=2; row++) {
       for (var col=0; col<=2; col++) {
-        if (this.board[row][col].value === emptyCell) {
+        if (vm.board[row][col].value === emptyCell) {
           return false;
         }
       }
@@ -267,31 +211,27 @@ angular.module('ticTacToeApp')
     return true;
   }
 
-  this.checkForEndOfGame = function() {
-    var rowMatch = checkForMatch(this.board[0][0], this.board[0][1], this.board[0][2]) ||
-                   checkForMatch(this.board[1][0], this.board[1][1], this.board[1][2]) ||
-                   checkForMatch(this.board[2][0], this.board[2][1], this.board[2][2]);
+  function checkForEndOfGame() {
+    var rowMatch = checkForMatch(vm.board[0][0], vm.board[0][1], vm.board[0][2]) ||
+                   checkForMatch(vm.board[1][0], vm.board[1][1], vm.board[1][2]) ||
+                   checkForMatch(vm.board[2][0], vm.board[2][1], vm.board[2][2]);
 
-    var columnMatch = checkForMatch(this.board[0][0], this.board[1][0], this.board[2][0]) ||
-                      checkForMatch(this.board[0][1], this.board[1][1], this.board[2][1]) ||
-                      checkForMatch(this.board[0][2], this.board[1][2], this.board[2][2]);
+    var columnMatch = checkForMatch(vm.board[0][0], vm.board[1][0], vm.board[2][0]) ||
+                      checkForMatch(vm.board[0][1], vm.board[1][1], vm.board[2][1]) ||
+                      checkForMatch(vm.board[0][2], vm.board[1][2], vm.board[2][2]);
 
-    var diagonalMatch = checkForMatch(this.board[0][0], this.board[1][1], this.board[2][2]) ||
-                        checkForMatch(this.board[2][0], this.board[1][1], this.board[0][2]);
+    var diagonalMatch = checkForMatch(vm.board[0][0], vm.board[1][1], vm.board[2][2]) ||
+                        checkForMatch(vm.board[2][0], vm.board[1][1], vm.board[0][2]);
 
-    this.winner = rowMatch || columnMatch || diagonalMatch;
-
-    if (this.winner === false && this.isBoardFull()) {
-      this.cat = true;
-    }
-
-    return this.winner || this.cat;
+    vm.winner = rowMatch || columnMatch || diagonalMatch;
+    vm.cat = vm.winner === false && vm.isBoardFull();
+    return vm.winner || vm.cat;
   };
 
-  this.move = function(cell) {
-    cell.value = this.currentPlayer;
-    if (this.checkForEndOfGame() === false) {
-      this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X';
+  vm.move = function(cell) {
+    cell.value = vm.currentPlayer;
+    if (vm.checkForEndOfGame() === false) {
+      vm.currentPlayer = vm.currentPlayer === 'X' ? 'O' : 'X';
     }
   };
 });
